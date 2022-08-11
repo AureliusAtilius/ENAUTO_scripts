@@ -3,10 +3,10 @@ import xmltodict
 
 
 router = {
-    'host': "ios-xe-mgmt-latest.com",
+    'host': "10.10.20.174",
     'port': "830",
-    'user': "developer",
-    'password': "Cisco12345"
+    'user': "cisco",
+    'password': "cisco"
 }
 
 

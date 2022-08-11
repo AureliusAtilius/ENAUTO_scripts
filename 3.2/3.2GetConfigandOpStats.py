@@ -1,10 +1,10 @@
 from ncclient import manager
 import xmltodict
 router= {
-        'host':'ios-xe-mgmt-latest.com',
+        'host':'sandbox-iosxe-latest-1.cisco.com',
         'port':'830',
-        'user':'developer',
-        'password':'Cisco12345'
+        'username':'developer',
+        'password':'C1sco12345'
 }
 
 
@@ -12,14 +12,14 @@ int_filter = """
 <filter>
     <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
         <interface>
-            <name>GigabitEthernet2</name>
+            <name>GigabitEthernet1</name>
         </interface>
     </interfaces>
     <interfaces-state xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
         <interface>
-            <name>GigabitEthernet2</name>
+            <name>GigabitEthernet1</name>
         </interface>
-    <interfaces-state>
+    </interfaces-state>
 </filter>
 """
 
