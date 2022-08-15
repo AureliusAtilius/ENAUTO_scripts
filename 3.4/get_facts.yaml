@@ -1,0 +1,19 @@
+---
+- name: Gather IOS-XE Facts
+  hosts: iosxe
+  connection: network_cli
+  tasks:
+    - name: run show run on remote device
+      ios_command:
+        commands: show running-config
+
+    - name: run multiple commands on remote nodes
+      ios_command:
+        commands:
+          - show version
+          - show interfaces
+      register: output
+    - name: format output
+      debug:
+        msg: "{{ output.stdout_lines }}"
+      
