@@ -1,0 +1,21 @@
+---
+        - name: Delete interface
+          hosts: iosxe
+          connection: network_cli
+          tasks:
+            - name: Delete Loopback265
+              ios_config:
+                lines: 
+                  - no interface Loopback265
+            - name: run show ip interfaces
+              ios_command:
+                commands: show ip interface 
+              register: output
+            - name: format output
+              debug:
+                msg: "{{ output.stdout_lines }}"
+                  
+                
+              
+              
+        

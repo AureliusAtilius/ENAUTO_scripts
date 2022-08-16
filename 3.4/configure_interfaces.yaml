@@ -1,0 +1,15 @@
+---
+        - name: Configure Loopback interface
+          hosts: iosxe
+          connection: network_cli
+          tasks:
+            - name: configure loopback interface
+              ios_config:
+                lines: 
+                  - ip address {{ loopback_ip }} 255.255.255.255
+                  - description Configured-with-ansible
+                parents: interface Loopback265
+              
+            
+              
+        
