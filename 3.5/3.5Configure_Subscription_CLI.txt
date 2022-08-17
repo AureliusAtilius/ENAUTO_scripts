@@ -1,0 +1,7 @@
+telemetry ietf subscription 101
+encoding encode-kvgpb
+filter xpath /memory-ios-xe-oper:memory-statistics/memory-statistic
+stream yang-push
+update-policy periodic 6000
+source-vrf Mgmt-intf
+receiver ip address 10.28.35.45 57555 protocol grpc-tcp
