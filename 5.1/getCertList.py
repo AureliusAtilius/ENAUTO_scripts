@@ -3,14 +3,13 @@ import requests,json,sys
 
 
 
-
-
-def get_login(username,password,url):
-        auth_url=f"{url}/j_security_check"
+                
+def get_certs(url,base_url):
+        auth_url=f"{base_url}/j_security_check"
         session = requests.session()
         login_body={
-                'j_username':username,
-                'j_password':password        
+                'j_username':'devnetuser',
+                'j_password':'RG!_Yw919_83'        
         }
 
         login_response=session.post(url=auth_url,data=login_body,verify=False)
@@ -21,10 +20,8 @@ def get_login(username,password,url):
         else:
                 print("*****LOGIN SUCCESS*****")
                 print(login_response)
-                return login_response
                 
-def get_certs(url,base_url):
-        session = requests.session()
+
         cert_urls={
                 'list':f'{base_url}/dataservice/certificate/vsmart/list',
                 'root':f'{base_url}/dataservice/certificate/rootcertificate'
@@ -41,6 +38,4 @@ def get_certs(url,base_url):
 
 if __name__=="__main__":
         base_url="https://sandbox-sdwan-2.cisco.com/"
-        
-        token=get_login('devnetuser','RG!_Yw919_83',base_url)
         get_certs('list',base_url)
