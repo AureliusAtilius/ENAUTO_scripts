@@ -3,10 +3,10 @@ import xmltodict
 
 
 router = {
-    'host': "10.10.20.174",
+    'host': "sandbox-iosxe-latest-1.cisco.com",
     'port': "830",
-    'user': "cisco",
-    'password': "cisco"
+    'username': "developer",
+    'password': "C1sco12345"
 }
 
 
@@ -17,7 +17,7 @@ int_conf = """
             <interface>
                 <name>GigabitEthernet2</name>
                 <description>Port to Fabric</description>
-                <enable>true</enabled>
+                <enable>true</enable>
             </interface>
         </interfaces>
     </config>
