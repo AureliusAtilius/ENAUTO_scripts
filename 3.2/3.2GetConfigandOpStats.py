@@ -9,7 +9,7 @@ router= {
 
 
 int_filter = """
-<filter>
+<filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
     <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
         <interface>
             <name>GigabitEthernet1</name>
@@ -30,9 +30,15 @@ with manager.connect(**router, hostkey_verify=False) as m:
 python_response= xmltodict.parse(netconf_response.xml)['rpc-reply']['data']
 
 
+
 int_config= python_response['interfaces']['interface']
 oper_state=python_response['interfaces-state']['interface']
 
-
-print(f"Name: {int_config['name']['#text']}")
+'''
 print("")
+print(int_config)
+print("")
+print(oper_state)
+'''
+print(f"Name: {int_config['name']} {int_config['type']['#text']}")
+print(F"Administrative Status: {oper_state['admin-status']} \nOperational Status: {oper_state['oper-status']} ")
