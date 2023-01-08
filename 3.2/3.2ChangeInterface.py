@@ -11,17 +11,15 @@ router = {
 
 
 int_conf = """
-<filter>
-    <config>
+    <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
         <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
             <interface>
                 <name>GigabitEthernet2</name>
                 <description>Port to Fabric</description>
-                <enable>true</enable>
+                <enabled>true</enabled>
             </interface>
         </interfaces>
     </config>
-</filter>
 """
 
 
