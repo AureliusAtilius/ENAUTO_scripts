@@ -1,6 +1,6 @@
 import requests,json
 from requests.exceptions import HTTPError
-import meraki
+
 
 
 #use meraki always on sandbox
@@ -28,11 +28,11 @@ def get_orgs():
 #get list of meraki organization networks  
 def get_networks(org_id):
         org_url=f"{base_url}/organizations/{org_id}/networks"
-
+        
         try:
                 response=requests.get(url=org_url, headers=headers).json()
-                response=json.dumps(response, indent=2)
                 return(response)
+
         except Exception as ex:
                 print(ex)
 
@@ -91,6 +91,8 @@ if __name__=="__main__":
         #if specific org doesn't exist, create it
         if not org_id:
                 create_orgs()
+        else:
+                print("Organization already exists.")
         
         #get network list
         network_list=get_networks(org_id=org_id)
@@ -98,8 +100,10 @@ if __name__=="__main__":
 
         #check for specific network by name, if it doesn't exist, create it
         network_name='ENAUTO_Test'
-        if network_name not in network_list:
+        if network_name not in json.dumps(network_list, indent=2):
                 create_network(org_id=org_id)
+        else:
+                print("Network already exists.")
 
         #get network list again to show newly created network
         network_list=get_networks(org_id=org_id)
