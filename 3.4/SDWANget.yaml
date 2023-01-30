@@ -1,0 +1,13 @@
+---
+        - name: Get Inventory
+          hosts: localhost
+          
+          tasks:
+          - name: Get inventory
+            uri:
+              url: "https://sandbox-sdwan-2.cisco.com/dataservice/device"
+              method: GET
+              username: devnetuser
+              password: RG!_Yw919_83
+              return_content: yes
+              validate_certs: no
