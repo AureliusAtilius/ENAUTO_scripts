@@ -1,0 +1,39 @@
+---
+  - name: AUTHENTICATE TO vMANAGE
+    hosts: localhost
+
+    tasks:
+      - name: GET COOKIE ISSUING POST REQUEST
+        uri:
+          url: "https://sandbox-sdwan-2.cisco.com/j_security_check"
+          method: POST
+          body:
+            j_username: "devnetuser"
+            j_password: "RG!_Yw919_83"
+          body_format: json
+          return_content: yes
+          validate_certs: no
+        register: login_data
+        
+  
+      - name: CREATE VARIABLE TO STORE SESSION COOKIE
+        set_fact:
+          viptela_cookie: "{{ login_data }}"
+
+      - name: GET REBOOT HISTORY DETAILS
+        uri:
+          url: "https://sandbox-sdwan-2.cisco.com/dataservice/device/reboothistory/details"
+          method: GET
+          headers:
+            Cookie: "{{ viptela_cookie }}"
+          return_content: yes
+          validate_certs: no
+        register: reboot_history
+
+      - name: CREATE REBOOT HISTORY VARIABLE
+        set_fact:
+          reboot_his: "{{ reboot_history }}"
+      
+      - name: PRINT REBOOT HISTORY
+        debug:
+          var: reboot_his
