@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import json,requests
+import json,requests,time
 
 class CiscoSDWAN:
         def __init__(self, host, port, username, password, verify=False) :
@@ -32,10 +32,10 @@ class CiscoSDWAN:
         @staticmethod 
         def get_instance_always_on():
                 return CiscoSDWAN(
-                        host="sandboxsdwan.cisco.com",
+                        host="https://sandbox-sdwan-2.cisco.com",
                         port=8443,
                         username="devnetuser",
-                        password="Cisco123!",
+                        password="RG!_Yw919_83",
                 )
         @staticmethod
         def get_instance_reserved():
@@ -204,7 +204,11 @@ class CiscoSDWAN:
                         "definition": {"vpnList": vpn_id, "regions": regions}
                 }
 
-                return self._req
+                return self._req(
+                        f"dataservice/template/policy/definition/mesh",
+                        methog="post",
+                        jsonbody=body,
+                )
         
         def add_policy_approute(
                         self, name, sla_id, dscp, pri_link, alt_link, description="none"
@@ -241,3 +245,94 @@ class CiscoSDWAN:
                         method="post",
                         jsonbody=body,
                 )
+        
+        def get_policy_vsmart(self):
+                return self._req(f"dataservice/template/policy/vsmart")
+        
+        def add_policy_vsmart(
+                        self, name, sites,vpns, approute_id, mesh_id, descriptption="none"
+        ):
+                body = {
+                        "policyDescritpion": descriptption,
+                        "poicyType": "feature",
+                        "policyName": name,
+                        "plicyDefinition": {
+                                "assembly": [
+                                        {
+                                                "definitionId": approute_id,
+                                                "type": "appRoute",
+                                                "entries": [{"siteLists": sites, "vpnLists": vpns}],
+                                        },
+                                        {"definitionId": mesh_id, "type": "mesh"},
+                                ]
+                        },
+                        "isPolicyActivated": False,
+
+                }
+
+                self._req(
+                        f"dataservice/template/policy/vsmart", method="post", jsonbody=body
+                )
+
+                policies = self.get_policy_vsmart()
+                for policy in policies.json()["data"]:
+                        if policy["policyName"] == name:
+                                return policy
+                
+                return {"policyId":None}
+
+        def activate_policy_vsmart(self, policy_id):
+                activate_resp = self_req(
+                        f"dataservice/template/policy/vsmart/activate/{policy_id}",
+                        method="post",
+                        params={"confirm": "true"},
+                        jsonbody={},
+
+                )
+
+                activate_id = activate_resp.json()["id"]
+                return self._wait_for_device_action_done(activate_id)
+        
+
+        # Dashboard APIs
+
+        def get_alarm_count(self):
+
+                return self._req("dataservice/alarms/count")
+        
+        def get_certificate_summary(self):
+
+                return self._req("dataservice/certificate/stats/summary")
+        
+        def get_control_status(self):
+
+                return self._req("dataservice/device/control/count")
+        
+
+
+        #Real-time monitoring
+
+        def get_device_tunnel_statistics(self, device_id):
+
+                return self._req(
+                        "dataservice/device/tunnel/statistics", params={"devicId": device_id}
+                )
+        
+        def get_device_control_connections(self, device_id):
+
+                return self._req(
+                        "dataservice/device/control/connections",
+                        params={"deviceId": device_id},
+                )
+
+        #Cert Management
+
+        def get_controller_certs(self):
+
+                return self._req("dataservice/certificate/vsmart/list")
+        
+        def get_root_cert(self):
+
+                return self._req("dataservice/certificate/rootcertificate")
+
+        
