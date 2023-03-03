@@ -335,4 +335,12 @@ class CiscoSDWAN:
 
                 return self._req("dataservice/certificate/rootcertificate")
 
+
+        # System statistics
+
+        def get_system_stats(self, query):
+
+                return self._req(
+                        "dataservice/statistics/system/", method="post",jsonbody=query
+                )
         
