@@ -1,0 +1,13 @@
+{
+        "type": "floor",
+        "site": {
+                "floor": {
+                        "name": "Floor 2",
+                        "paraneName": "Global/Maryland/secretlab",
+                        "rfModel": "Cubes and Walled Offices",
+                        "width": "50",
+                        "length": "60",
+                        "height": "10"
+                }
+        }
+}
