@@ -44,6 +44,7 @@ class DNACRequester:
             headers=self.headers,
             json=jsonbody,
             params=params,
+            verify=False
         )
 
         if raise_for_status:
