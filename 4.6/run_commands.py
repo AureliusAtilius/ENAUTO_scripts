@@ -7,10 +7,11 @@ from dnac_requester import DNACRequester
 def main():
     
     dnac = DNACRequester(
-        host = "https://sandboxdnac.cisco.com",
+        host = "sandboxdnac.cisco.com",
         username="devnetuser",
         password="Cisco123!",
-        verify=False
+        verify=False,
+        old_style=True
     )
 
     search_params= {
@@ -26,6 +27,7 @@ def main():
 
         if not dev["errorCode"]:
             print(f"Adding {dev['hostname']}: {dev['instanceUuid']}")
+            device_uuids.append(dev['instanceUuid'])
 
     command_body = {
         "commands": ["show inventory", "show version", "show badstuff"],
