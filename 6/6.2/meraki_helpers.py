@@ -51,6 +51,6 @@ def req(resource, method="get", jsonbody=None, params=None):
         params=params,
     )
 
-    resp.rais_for_status()
+    resp.raise_for_status()
 
     return resp

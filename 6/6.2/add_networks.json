@@ -1,0 +1,36 @@
+[
+    {
+        "body": {
+            "name": "Gotham City Bank",
+            "timeZone": "America/Los_Angeles",
+            "type": "wireless"
+        },
+        "devices": [
+            {
+                "add": {
+                    "serial": "Q2XD-R6QM-XUMP"
+                },
+                "update": {
+                    "name": "First Floor AP"
+                }
+            }
+        ]
+    },
+    {
+        "body": {
+            "name": "Gotham City Bank Camera",
+            "timeZone": "America/Los_Angeles",
+            "type": "camera"
+        },
+        "devices": [
+            {
+                "add": {
+                    "serial": "Q2FV-RQJM-572T"
+                },
+                "update": {
+                    "name": "Lobby Cam"
+                }
+            }
+        ]  
+    }
+]
