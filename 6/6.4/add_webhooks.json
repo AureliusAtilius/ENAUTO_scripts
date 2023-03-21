@@ -1,0 +1,12 @@
+[
+    {
+        "name": "fredsted",
+        "url": "https://webhook.site/<add site id>",
+        "sharedSecret": "denmark"
+    },
+    {
+        "name": "andychilton",
+        "url": "https://postb.in/<add sit id>",
+        "sharedSecret": "newzealand"
+    }
+]
