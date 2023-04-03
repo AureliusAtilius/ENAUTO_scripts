@@ -1,4 +1,4 @@
-import requests
+import requests,json
 
 #Disable any warnings that might come from making a request and clean up the output for data
 requests.packages.urllib3.disable_warnings()
@@ -29,3 +29,4 @@ url = "https://sandbox-sdwan-2.cisco.com/dataservice/template/feature"
 response = requests.get(url, cookies=response.cookies, verify=False)
 
 print(response.status_code)
+print(json.dumps(response.json(),indent=2))
