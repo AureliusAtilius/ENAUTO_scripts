@@ -6,7 +6,7 @@ if __name__ == '__main__':
     router = {
     'host': "sandbox-iosxe-latest-1.cisco.com",
     'port': "830",
-    'username': "developer",
+    'username': "admin",
     'password': "C1sco12345"
 }
 
@@ -19,6 +19,8 @@ if __name__ == '__main__':
     hostname_filter = '''
                       <filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
                           <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+                            <hostname xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+                            </hostname>
                           </native>
                       </filter>
                       '''
