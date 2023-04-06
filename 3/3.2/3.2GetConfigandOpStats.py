@@ -3,7 +3,7 @@ import xmltodict
 router= {
         'host':'sandbox-iosxe-latest-1.cisco.com',
         'port':'830',
-        'username':'developer',
+        'username':'admin',
         'password':'C1sco12345'
 }
 
@@ -12,12 +12,12 @@ int_filter = """
 <filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
     <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
         <interface>
-            <name>GigabitEthernet1</name>
+            <name>GigabitEthernet2</name>
         </interface>
     </interfaces>
     <interfaces-state xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
         <interface>
-            <name>GigabitEthernet1</name>
+            <name>GigabitEthernet2</name>
         </interface>
     </interfaces-state>
 </filter>
@@ -29,7 +29,7 @@ with manager.connect(**router, hostkey_verify=False) as m:
 
 python_response= xmltodict.parse(netconf_response.xml)['rpc-reply']['data']
 
-
+print(python_response)
 
 int_config= python_response['interfaces']['interface']
 oper_state=python_response['interfaces-state']['interface']

@@ -1,10 +1,10 @@
 from netmiko import ConnectHandler
 
 router = {
-        'host':'ios-xe-mgmt-latest.cisco.com',
-        'port': '8181',
-        'username':'root',
-        'password':'Cisco12345',
+        'host':'sandbox-iosxe-latest-1.cisco.com',
+        'port': '22',
+        'username':'admin',
+        'password':'C1sco12345',
         'device_type':'cisco_ios'
 }
 

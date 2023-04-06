@@ -5,7 +5,7 @@ import xmltodict
 router = {
     'host': "sandbox-iosxe-latest-1.cisco.com",
     'port': "830",
-    'username': "developer",
+    'username': "admin",
     'password': "C1sco12345"
 }
 
@@ -25,3 +25,4 @@ int_conf = """
 
 with manager.connect(**router, hostkey_verify=False) as m:
         response=m.edit_config(int_conf,target="running")
+        print(m.)
