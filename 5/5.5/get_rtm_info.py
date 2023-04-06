@@ -25,5 +25,5 @@ def main():
                     f"proto: {item['tunnel-protocol']} to {item['dest-ip']}"
                 )
 
-        control = sdwan.get_device_control_connections(vedg_id)
+        control = sdwan.get_device_control_connections(vedge_id)
         print(" Control connections")
