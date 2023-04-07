@@ -4,7 +4,7 @@ import json
 router = {
     'host': "sandbox-iosxe-latest-1.cisco.com",
     'port': "443",
-    'username': "developer",
+    'username': "admin",
     'password': "C1sco12345"
 }
 
@@ -16,11 +16,11 @@ headers = {
 base_url = f"https://{router['host']}:{router['port']}/restconf/data/ietf-interfaces:interfaces/"
 
 response = requests.get(url=base_url, headers=headers, auth=(router['username'], router['password']), verify=False).json()
-
+print(json.dumps(response,indent=2))
 payload = {
     "ietf-interfaces:interface": {
-        "name": "Loopback55",
-        "description": "Test Added Loopback",
+        "name": "Loopback100",
+        "description": "I don't know if I'm going to pass ENAUTO",
         "type": "iana-if-type:softwareLoopback",
         "enabled": True,
         "ietf-ip:ipv4": {
