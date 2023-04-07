@@ -1,5 +1,6 @@
 from ncclient import manager
 import xmltodict
+import xml.dom.minidom
 
 
 router = {
@@ -25,4 +26,5 @@ int_conf = """
 
 with manager.connect(**router, hostkey_verify=False) as m:
         response=m.edit_config(int_conf,target="running")
-        print(m.)
+        xmlDom = xml.dom.minidom.parseString(str(response))
+        print(xmlDom.toprettyxml( indent = "  " ))
