@@ -1,0 +1,21 @@
+<config>  
+    <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
+        <mdt-subscription>
+            <subsciption-id> </subsciption-id>
+            <base>
+                <stream>yang-push</stream>
+                <encoding>encode-kvgpb</encoding>
+
+                if period == on change
+                <no-synch-on-start>false</no-synch-on-start>
+                <period>centiseconds|on change</period>
+                <xpath></xpath>
+            </base>
+            <mdt-receivers>
+                <address></address>
+                <port></port>
+                <protocol>grpc-tcp</protocol>
+            </mdt-receivers>
+        </mdt-subscription>
+    <mdt-config-data>
+</config>
