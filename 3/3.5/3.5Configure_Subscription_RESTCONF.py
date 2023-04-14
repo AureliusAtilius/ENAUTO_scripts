@@ -42,3 +42,5 @@ payload = {
 print(payload)
 
 response = requests.post(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
+
+print(json.dumps(response.json(),indent=2))
