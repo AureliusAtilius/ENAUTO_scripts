@@ -19,6 +19,8 @@ url = f"https://{router['host']}:{router['port']}/restconf/data/{module}"
 print(url)
   
 payload = {
+"mdt-config-data":
+{
   "mdt-subscription": [
     {
       "subscription-id": 100,
@@ -36,7 +38,7 @@ payload = {
     }
   ]
 }
-
+}
 print(payload)
 
 response = requests.put(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
