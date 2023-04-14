@@ -25,8 +25,6 @@ payload = {
       "base": {
         "stream": "yang-push",
         "encoding": "encod-kvgpb",
-        
-        "rcvr-type": "string",
         "period": 1000,
         "xpath": "/process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds",
       },
