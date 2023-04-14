@@ -39,6 +39,6 @@ payload = {
 
 print(payload)
 
-response = requests.patch(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
+response = requests.put(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
 
 print(json.dumps(response.json(),indent=2))
