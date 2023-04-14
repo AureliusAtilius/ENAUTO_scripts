@@ -3,7 +3,7 @@ from ncclient import manager
 router= {
         'host':'sandbox-iosxe-latest-1.cisco.com',
         'port':'830',
-        'username':'developer',
+        'username':'admin',
         'password':'C1sco12345'
 }
 
