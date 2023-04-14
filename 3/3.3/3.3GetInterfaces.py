@@ -1,7 +1,7 @@
 import requests,json
 
 router = {
-    'host': "sandbox-iosxe-latest-1.cisco.com",
+    'host': "https://sandbox-iosxe-latest-1.cisco.com",
     'port': "443",
     'username': "admin",
     'password': "C1sco12345"
