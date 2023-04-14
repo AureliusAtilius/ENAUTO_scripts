@@ -13,7 +13,7 @@ headers = {
       "Content-Type" : "application/yang-data+json"
    }
 
-module = "Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription"
+module = "Cisco-IOS-XE-mdt-cfg:mdt-config-data"
 
 url = f"https://{router['host']}:{router['port']}/restconf/data/{module}"
 print(url)
