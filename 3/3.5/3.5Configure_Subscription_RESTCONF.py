@@ -2,7 +2,7 @@ import requests
 import json
 
 router = {
-    'host': "sandbox-iosxe-latest-1.cisco.com",
+    'host': "10.10.20.48",
     'port': "443",
     'username': "developer",
     'password': "C1sco12345"
@@ -17,26 +17,7 @@ module = "Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription"
 
 url = f"https://{router['host']}:{router['port']}/restconf/data/{module}"
 print(url)
-
-payload = {
-        "mdt-subscription": [
-    {
-                "subscription-id": 100,
-                "base": {
-                    "stream": "yang-push",
-                    "encoding": "encode-kvgpb",
-                    "xpath": "/process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds",
-                    "period": 1000
-                },
-                "mdt-receivers": {
-                    "address": "10.0.19.188",
-                    "port": 42518,
-                    "protocol": "grpc-tcp"
-                }
-            }
-
-        }
-    
+  
 payload = {
   "mdt-subscription": [
     {
