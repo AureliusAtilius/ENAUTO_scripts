@@ -24,7 +24,7 @@ payload = {
       "subscription-id": 100,
       "base": {
         "stream": "yang-push",
-        "encoding": "encod-kvgpb",
+        "encoding": "encode-kvgpb",
         "period": 1000,
         "xpath": "/process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds",
       },
@@ -39,6 +39,6 @@ payload = {
 
 print(payload)
 
-response = requests.post(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
+response = requests.patch(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
 
 print(json.dumps(response.json(),indent=2))
