@@ -39,6 +39,6 @@ payload = {
 }
 print(payload)
 
-response = requests.put(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
+response = requests.post(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
 
 print(response)
