@@ -12,25 +12,25 @@ router = {
 }
 
 with manager.connect(**router) as m:
-        # rpc = f"""
-        #     <establish-subscription xmlns='urn:ietf:params:xml:ns:yang:ietf-event-notifications' xmlns:yp='urn:ietf:params:xml:ns:yang:ietf-yang-push'>
-        #         <stream>yp:yang-push</stream>
-        #         <yp:xpath-filter>/memory-ios-xe-oper:memory-statistics/memory-statistic</yp:xpath-filter>
-        #         <yp:period>500</yp:period>
-        #     </establish-subscription>
-        # """
-        rpc = """
-                <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
-                    <mdt-subscription>
-                    <subscription-id>101</subscription-id>
-                    <base>
-                        <stream>yang-push</stream>
-                        <encoding>encode-kvgpb</encoding>
-                        <period>500</period>
-                        <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
-                    </base>
-                    </mdt-subscription>
-                </mdt-config-data>"""
+        rpc = f"""
+            <establish-subscription xmlns='urn:ietf:params:xml:ns:yang:ietf-event-notifications' xmlns:yp='urn:ietf:params:xml:ns:yang:ietf-yang-push'>
+                <stream>yp:yang-push</stream>
+                <yp:xpath-filter>/memory-ios-xe-oper:memory-statistics/memory-statistic</yp:xpath-filter>
+                <yp:period>500</yp:period>
+            </establish-subscription>
+        """
+        # rpc = """
+        #         <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
+        #             <mdt-subscription>
+        #             <subscription-id>101</subscription-id>
+        #             <base>
+        #                 <stream>yang-push</stream>
+        #                 <encoding>encode-kvgpb</encoding>
+        #                 <period>500</period>
+        #                 <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
+        #             </base>
+        #             </mdt-subscription>
+        #         </mdt-config-data>"""
 
         # rpc = """<mdt-subscription xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg/mdt-config-data/">
         #     <subsciption-id>102</subsciption-id>
