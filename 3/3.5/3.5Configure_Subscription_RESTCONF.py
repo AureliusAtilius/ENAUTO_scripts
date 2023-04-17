@@ -20,8 +20,6 @@ print(url)
   
   
 payload = {
-  "mdt-subscription": [
-    {
       "subscription-id": 100,
       "base": {
         "stream": "yang-push",
@@ -35,8 +33,7 @@ payload = {
         "port": 42518
       },
     }
-  ]
-}
+  
 print(payload)
 
 response = requests.put(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
