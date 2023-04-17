@@ -13,13 +13,15 @@ headers = {
       "Content-Type" : "application/yang-data+json"
    }
 
-module = "Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription"
+module = "Cisco-IOS-XE-mdt-cfg:mdt-config-data/"
 
 url = f"https://{router['host']}:{router['port']}/restconf/data/{module}"
 print(url)
   
   
 payload = {
+  "mdt-subscription": [
+    {
       "subscription-id": 100,
       "base": {
         "stream": "yang-push",
@@ -33,7 +35,8 @@ payload = {
         "port": 42518
       },
     }
-  
+  ]
+}
 print(payload)
 
 response = requests.put(url, headers=headers, data=json.dumps(payload), auth=(router['username'], router['password']), verify=False)
