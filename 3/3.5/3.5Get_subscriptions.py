@@ -22,9 +22,7 @@ with manager.connect(**router, hostkey_verify=False) as m:
         netconf_response = m.get(int_filter)
 
 
-python_response= xmltodict.parse(netconf_response.xml)['rpc-reply']['data']
-
-xmlDom = xml.dom.minidom.parseString(str(python_response))
+xmlDom = xml.dom.minidom.parseString(str(netconf_response))
 print(xmlDom.toprettyxml( indent = "  " ))
 
 
