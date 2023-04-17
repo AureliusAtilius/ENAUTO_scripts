@@ -21,8 +21,7 @@ with manager.connect(**router) as m:
         # """
 
 
-        rpc = """
-        <config>  
+        rpc = """  
     <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
         <mdt-subscription>
             <subsciption-id> </subsciption-id>
@@ -38,8 +37,7 @@ with manager.connect(**router) as m:
                 <protocol>grpc-tcp</protocol>
             </mdt-receivers>
         </mdt-subscription>
-    </mdt-config-data>
-</config>"""
+    </mdt-config-data>"""
         response = m.dispatch(fromstring(rpc))
         python_resp = xmltodict.parse(response.xml)
         print(python_resp['rpc-reply']['subscription-result']['#text'])
