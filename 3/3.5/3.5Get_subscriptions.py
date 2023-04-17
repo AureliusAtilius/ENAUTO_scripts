@@ -1,5 +1,6 @@
 from ncclient import manager
 import xmltodict
+import xml.dom.minidom
 router= {
         'host':'10.10.20.48',
         'port':'830',
@@ -23,8 +24,8 @@ with manager.connect(**router, hostkey_verify=False) as m:
 
 python_response= xmltodict.parse(netconf_response.xml)['rpc-reply']['data']
 
-print(python_response)
-
+xmlDom = xml.dom.minidom.parseString(str(python_response))
+print(xmlDom.toprettyxml( indent = "  " ))
 
 
 
