@@ -12,13 +12,6 @@ int_filter = """
 <filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
       <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
         <mdt-subscription>
-          <subscription-id>101</subscription-id>
-          <base>
-            <stream>yang-push</stream>
-            <encoding>encode-kvgpb</encoding>
-            <period>500</period>
-            <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
-          </base>
         </mdt-subscription>
       </mdt-config-data>
     </filter>
