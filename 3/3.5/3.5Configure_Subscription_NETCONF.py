@@ -12,13 +12,34 @@ router = {
 }
 
 with manager.connect(**router) as m:
-        rpc = f"""
-            <establish-subscription xmlns='urn:ietf:params:xml:ns:yang:ietf-event-notifications' xmlns:yp='urn:ietf:params:xml:ns:yang:ietf-yang-push'>
-                <stream>yp:yang-push</stream>
-                <yp:xpath-filter>/memory-ios-xe-oper:memory-statistics/memory-statistic</yp:xpath-filter>
-                <yp:period>500</yp:period>
-            </establish-subscription>
-        """
+        # rpc = f"""
+        #     <establish-subscription xmlns='urn:ietf:params:xml:ns:yang:ietf-event-notifications' xmlns:yp='urn:ietf:params:xml:ns:yang:ietf-yang-push'>
+        #         <stream>yp:yang-push</stream>
+        #         <yp:xpath-filter>/memory-ios-xe-oper:memory-statistics/memory-statistic</yp:xpath-filter>
+        #         <yp:period>500</yp:period>
+        #     </establish-subscription>
+        # """
+
+
+        rpc = """
+        <config>  
+    <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
+        <mdt-subscription>
+            <subsciption-id> </subsciption-id>
+            <base>
+                <stream>yang-push</stream>
+                <encoding>encode-kvgpb</encoding>
+                <period>500</period>
+                <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
+            </base>
+            <mdt-receivers>
+                <address>10.10.20.50</address>
+                <port>5236</port>
+                <protocol>grpc-tcp</protocol>
+            </mdt-receivers>
+        </mdt-subscription>
+    <mdt-config-data>
+</config>"""
         response = m.dispatch(fromstring(rpc))
         python_resp = xmltodict.parse(response.xml)
         print(python_resp['rpc-reply']['subscription-result']['#text'])
