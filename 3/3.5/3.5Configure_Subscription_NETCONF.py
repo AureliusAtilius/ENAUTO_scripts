@@ -19,22 +19,42 @@ with manager.connect(**router) as m:
         #         <yp:period>500</yp:period>
         #     </establish-subscription>
         # """
+        rpc = """
+            <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
+            <edit-config>
+                <target>
+                <running/>
+                </target>
+                <config>
+                <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
+                    <mdt-subscription>
+                    <subscription-id>101</subscription-id>
+                    <base>
+                        <stream>yang-push</stream>
+                        <encoding>encode-kvgpb</encoding>
+                        <period>500</period>
+                        <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
+                    </base>
+                    </mdt-subscription>
+                </mdt-config-data>
+                </config>
+            </edit-config>
+            </rpc>"""
 
-
-        rpc = """<mdt-subscription xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg/mdt-config-data/">
-            <subsciption-id>102</subsciption-id>
-            <base>
-                <stream>yang-push</stream>
-                <encoding>encode-kvgpb</encoding>
-                <period>500</period>
-                <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
-            </base>
-            <mdt-receivers>
-                <address>10.10.20.50</address>
-                <port>5236</port>
-                <protocol>grpc-tcp</protocol>
-            </mdt-receivers>
-        </mdt-subscription>"""
+        # rpc = """<mdt-subscription xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg/mdt-config-data/">
+        #     <subsciption-id>102</subsciption-id>
+        #     <base>
+        #         <stream>yang-push</stream>
+        #         <encoding>encode-kvgpb</encoding>
+        #         <period>500</period>
+        #         <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
+        #     </base>
+        #     <mdt-receivers>
+        #         <address>10.10.20.50</address>
+        #         <port>5236</port>
+        #         <protocol>grpc-tcp</protocol>
+        #     </mdt-receivers>
+        # </mdt-subscription>"""
         response = m.dispatch(fromstring(rpc))
         python_resp = xmltodict.parse(response.xml)
         print(python_resp['rpc-reply']['subscription-result']['#text'])
