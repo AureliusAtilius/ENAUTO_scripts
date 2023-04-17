@@ -38,7 +38,7 @@ with manager.connect(**router) as m:
                 <protocol>grpc-tcp</protocol>
             </mdt-receivers>
         </mdt-subscription>
-    <mdt-config-data>
+    </mdt-config-data>
 </config>"""
         response = m.dispatch(fromstring(rpc))
         python_resp = xmltodict.parse(response.xml)
