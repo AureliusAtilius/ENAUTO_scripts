@@ -20,12 +20,6 @@ with manager.connect(**router) as m:
         #     </establish-subscription>
         # """
         rpc = """
-            <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
-            <edit-config>
-                <target>
-                <running/>
-                </target>
-                <config>
                 <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
                     <mdt-subscription>
                     <subscription-id>101</subscription-id>
@@ -36,10 +30,7 @@ with manager.connect(**router) as m:
                         <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
                     </base>
                     </mdt-subscription>
-                </mdt-config-data>
-                </config>
-            </edit-config>
-            </rpc>"""
+                </mdt-config-data>"""
 
         # rpc = """<mdt-subscription xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg/mdt-config-data/">
         #     <subsciption-id>102</subsciption-id>
