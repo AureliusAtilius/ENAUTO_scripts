@@ -37,14 +37,6 @@ with manager.connect(**router) as m:
             """
         response = m.edit_config(rpc,target="running")
         python_resp = xmltodict.parse(response.xml)
-        print(python_resp['rpc-reply']['subscription-result']['#text'])
-        print(python_resp['rpc-reply']['subscription-id']['#text'])
+        print(python_resp['rpc-reply'])
 
-        while True:
-            sub_data = m.take_notification()
-            python_sub_data = xmltodict.parse(sub_data.notification_xml)
-            print(f"Sub ID: {python_sub_data['notification']['push-update']['subscription-id']}")
-            print(python_sub_data)
-            print(f"Name: {python_sub_data['notification']['push-update']['datastore-contents-xml']['memory-statistics']['memory-statistic'][0]['name']}")
-
-
+        
