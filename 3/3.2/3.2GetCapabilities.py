@@ -5,7 +5,6 @@ router= {
         'port':'830',
         'username':'developer',
         'password':'C1sco12345',
-        'hostkey_verify': False
 }
 
 with manager.connect(**router,hostkey_verify=False) as m:
