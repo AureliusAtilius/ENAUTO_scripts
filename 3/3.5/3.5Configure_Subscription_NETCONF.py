@@ -11,7 +11,7 @@ router = {
     "device_params": {"name": "csr"}
 }
 
-with manager.connect(**router, hostkey_verify=False) as m:
+with manager.connect(**router) as m:
         # rpc = f"""
         #     <establish-subscription xmlns='urn:ietf:params:xml:ns:yang:ietf-event-notifications' xmlns:yp='urn:ietf:params:xml:ns:yang:ietf-yang-push'>
         #         <stream>yp:yang-push</stream>
