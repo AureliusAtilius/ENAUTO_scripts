@@ -31,6 +31,11 @@ with manager.connect(**router) as m:
                     <period>500</period>
                     <xpath>/memory-ios-xe-oper:memory-statistics/memory-statistic</xpath>
                 </base>
+                <mdt-receivers>
+                    <address>10.10.20.50</address>
+                    <port>5723</port>
+                    <protocol>grpc-tcp</protocol>
+                </mdt-receivers>
                 </mdt-subscription>
             </mdt-config-data>
             </config>
