@@ -26,7 +26,7 @@ with manager.connect(**router) as m:
             <target>
             <running/>
             </target>
-            <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+            <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
             <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
                 <mdt-subscription>
                 <subscription-id>101</subscription-id>
