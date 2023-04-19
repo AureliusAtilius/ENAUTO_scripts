@@ -11,7 +11,7 @@ router = {
     "device_params": {"name": "csr"}
 }
 
-with manager.connect(**router) as m:
+with manager.connect(**router, hostkey_verify=False) as m:
         rpc = f"""
             <establish-subscription xmlns='urn:ietf:params:xml:ns:yang:ietf-event-notifications' xmlns:yp='urn:ietf:params:xml:ns:yang:ietf-yang-push'>
                 <stream>yp:yang-push</stream>
@@ -19,7 +19,7 @@ with manager.connect(**router) as m:
                 <yp:period>500</yp:period>
             </establish-subscription>
         """
-        response = m.dispatch(fromstring(rpc))
+        response = m.edit_config(rpc,target="running")
         python_resp = xmltodict.parse(response.xml)
         print(python_resp['rpc-reply']['subscription-result']['#text'])
         print(python_resp['rpc-reply']['subscription-id']['#text'])
