@@ -22,7 +22,7 @@ with manager.connect(**router) as m:
 
         rpc = """
             <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
-            <get-config>
+            <edit-config>
                 <source>
                 <running/>
                 </source>
@@ -39,7 +39,7 @@ with manager.connect(**router) as m:
                     </mdt-subscription>
                 </mdt-config-data>
                 </filter>
-            </get-config>
+            </edit-config>
             </rpc>"""
         response = m.edit_config(rpc,target="running")
         python_resp = xmltodict.parse(response.xml)
