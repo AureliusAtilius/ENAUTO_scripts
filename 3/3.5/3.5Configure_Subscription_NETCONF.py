@@ -21,11 +21,6 @@ with manager.connect(**router) as m:
         # """
 
         rpc = """
-        <rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
-        <edit-config>
-            <target>
-            <running/>
-            </target>
             <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
             <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
                 <mdt-subscription>
@@ -39,8 +34,6 @@ with manager.connect(**router) as m:
                 </mdt-subscription>
             </mdt-config-data>
             </config>
-        </edit-config>
-        </rpc>
             """
         response = m.edit_config(rpc,target="running")
         python_resp = xmltodict.parse(response.xml)
