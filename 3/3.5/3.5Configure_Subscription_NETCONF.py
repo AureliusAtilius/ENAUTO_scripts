@@ -12,13 +12,6 @@ router = {
 }
 
 with manager.connect(**router) as m:
-        # rpc = f"""
-        #     <establish-subscription xmlns='urn:ietf:params:xml:ns:yang:ietf-event-notifications' xmlns:yp='urn:ietf:params:xml:ns:yang:ietf-yang-push'>
-        #         <stream>yp:yang-push</stream>
-        #         <yp:xpath-filter>/memory-ios-xe-oper:memory-statistics/memory-statistic</yp:xpath-filter>
-        #         <yp:period>500</yp:period>
-        #     </establish-subscription>
-        # """
 
         rpc = """
             <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
