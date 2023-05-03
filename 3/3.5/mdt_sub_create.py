@@ -17,8 +17,7 @@ xe = requests.session()
 
 resp = xe.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription",headers=headers,auth=auth,verify=False)
 
-if resp:
-    print(json.dumps(resp.json(),indent=2))
+
 
 payload = {
     "mdt-subscription": [ 
