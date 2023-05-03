@@ -29,7 +29,7 @@ payload = {
             "x-path": "/process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds"
             },
         "mdt-receivers": {
-            "address": "10.10.20.48",
+            "address": "10.10.20.50",
             "port": 5233,
             "protocol": "grpc-tcp"
         }
