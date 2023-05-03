@@ -45,7 +45,7 @@ resp = requests.post(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cf
 
 print(resp.status_code)
 print(resp.reason)
-resp.
+
 resp = requests.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription",headers=headers,auth=(r["username"],r["password"]),verify=False)
 
 if resp:
