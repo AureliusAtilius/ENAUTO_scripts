@@ -17,7 +17,8 @@ xe = requests.session()
 
 resp = xe.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/",headers=headers,auth=auth,verify=False)
 
-print(json.dumps(resp.json(),indent=2))
+if resp:
+    print(json.dumps(resp.json(),indent=2))
 
 payload = {
     "mdt-subscription": [ 
@@ -47,4 +48,5 @@ print(resp.status_code)
 
 resp = xe.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/",headers=headers,auth=auth,verify=False)
 
-print(json.dumps(resp.json(),indent=2))
+if resp:
+    print(json.dumps(resp.json(),indent=2))
