@@ -15,10 +15,6 @@ headers = {
 
 
 
-resp = requests.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription",headers=headers,auth=(r["username"],r["password"]),verify=False)
-
-
-
 payload = {
     "mdt-subscription": [ 
         {
@@ -27,7 +23,7 @@ payload = {
         "base": {
             "stream": "yang-push",
             "encoding": "encode-kvgpb",
-            "period": 1000,
+            "period": "1000",
             "x-path": "/process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds"
             },
         "mdt-receivers": {
