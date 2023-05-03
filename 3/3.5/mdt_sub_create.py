@@ -13,9 +13,9 @@ headers = {
     "Accept": "application/yang-data+json"
 }
 
-xe = requests.session()
 
-resp = xe.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription",headers=headers,auth=auth,verify=False)
+
+resp = requests.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription",headers=headers,auth=(r["username"],r["password"]),verify=False)
 
 
 
@@ -32,7 +32,7 @@ payload = {
             },
         "mdt-receivers": {
             "address": "10.10.20.50",
-            "port": 5233,
+            "port": 42518,
             "protocol": "grpc-tcp"
         }
         
@@ -41,11 +41,11 @@ payload = {
 }
 
 print("Submitting mdt subscription")
-resp = xe.post(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/",data=json.dumps(payload),headers=headers,auth=auth,verify=False)
+resp = requests.post(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/",data=json.dumps(payload),headers=headers,auth=(r["username"],r["password"]),verify=False)
 
 print(resp.status_code)
 
-resp = xe.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription",headers=headers,auth=auth,verify=False)
+resp = requests.get(f"https://{r['host']}:443/restconf/data/Cisco-IOS-XE-mdt-cfg:mdt-config-data/mdt-subscription",headers=headers,auth=(r["username"],r["password"]),verify=False)
 
 if resp:
     print(json.dumps(resp.json(),indent=2))
