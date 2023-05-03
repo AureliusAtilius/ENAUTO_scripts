@@ -18,13 +18,12 @@ headers = {
 payload = {
     "mdt-subscription": [ 
         {
-        
         "subscription-id": 100,
         "base": {
             "stream": "yang-push",
             "encoding": "encode-kvgpb",
             "period": "1000",
-            "x-path": "/process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds"
+            "xpath": "/process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds"
             },
         "mdt-receivers": {
             "address": "10.10.20.50",
