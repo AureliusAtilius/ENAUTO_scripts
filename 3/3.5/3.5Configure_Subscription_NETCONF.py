@@ -2,6 +2,7 @@ from ncclient import manager
 import xmltodict
 from lxml.etree import fromstring
 
+# dictionary containing device connection info
 router = {
     "host":"10.10.20.48",
     "port":"830",
@@ -11,8 +12,10 @@ router = {
     "device_params": {"name": "csr"}
 }
 
+# connect to device
 with manager.connect(**router) as m:
 
+        # NETCONF payload in xml format containing subscription mdt subscription info
         rpc = """
             <config xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
             <mdt-config-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-mdt-cfg">
@@ -33,7 +36,10 @@ with manager.connect(**router) as m:
             </mdt-config-data>
             </config>
             """
+        # send request with payload to running configuration
         response = m.edit_config(rpc,target="running")
+
+        # convert response to human friendly format and print
         python_resp = xmltodict.parse(response.xml)
         print(python_resp['rpc-reply'])
 
