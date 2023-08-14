@@ -5,7 +5,7 @@ from dnac_requester import DNACRequester
 
 def main():
     
-
+    # invoke instance of DNACRequester
     dnac= DNACRequester(
         host="sandboxdnac.cisco.com",
         username="devnetuser",
@@ -13,18 +13,23 @@ def main():
         verify=False
     )
 
+    # payload containing project information for project creation
     proj_body = {
         "name": "globo_proj",
         "description": "globamantics config templates"
     }
 
+    # send post request with project payload to template-programmer resource
     proj_resp= dnac.req(
         f"dna/intent/api/v1/template-programmer/project",
         method="post",
         jsonbody=proj_body
     )
 
+    # get task id from response and wait for task completion
     proj_task = dnac.wait_for_task(proj_resp.json()["response"]["taskId"])
+
+    # get project id from response
     proj_id = proj_task.json()["response"]["data"]
     current_path=Path.chmod()
     for template in os.listdir(f"{current_path}/templates"):
