@@ -1,6 +1,6 @@
 import time, requests
 
-
+# class for requester object
 class DNACRequester:
     
     def __init__(self, host, username, password, verify=True, old_style=False):
@@ -11,22 +11,25 @@ class DNACRequester:
         if not verify:
             requests.packages.urllib3.disable_warnings()
 
+        # REST API headers
         self.headers={
             "Accept": "application/json",
             "Content-Type": "application/json",
         }
         
+        # provide for older version of auth URL
         if old_style:
             auth_url= "api/system/v1/auth/token"
 
         else:
             auth_url = " dna/system/api/v1/auth/token"
 
-        
+        # perform request for auth token
         auth_resp= self.req(auth_url, method="post", auth=(username, password))
         auth_resp.raise_for_status()
         self.headers["X-Auth-Token"] = auth_resp.json()["Token"]
 
+    # function for basic request
     def req(
             self,
             resource,
@@ -46,12 +49,13 @@ class DNACRequester:
             params=params,
             verify=False
         )
-
+        # error handling 
         if raise_for_status:
             resp.raise_for_status()
 
         return resp
     
+    # function that handles asynchronous requests where three five second attempts are made before returning timeout error
     def wait_for_task(self, task_id, wait_time=5, attempts=3):
 
 
