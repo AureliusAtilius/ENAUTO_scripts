@@ -31,7 +31,7 @@ def main():
 
     # get project id from response
     proj_id = proj_task.json()["response"]["data"]
-    current_path=Path.chmod()
+    current_path=Path.cwd()
     for template in os.listdir(f"{current_path}/templates"):
         with open(f"{current_path}/templates/{template}", "r") as handle:
             temp_data= json.load(handle)
