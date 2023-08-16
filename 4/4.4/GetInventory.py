@@ -3,14 +3,17 @@ from requests.exceptions import HTTPError
 import json
 from get_token import get_token
 
+# get auth token
 token=get_token()
 
+# REST API headers containing auth token
 headers = {
     'x-auth-token': token,
     'accept': "application/json",
     'content-type': "application/json"
 }
 
+# funtion for requesting list of network devices from DNAC
 def get_device_list():
         base_url = "https://sandboxdnac.cisco.com/dna"
         dev_list_url = f"{base_url}/intent/api/v1/network-device"

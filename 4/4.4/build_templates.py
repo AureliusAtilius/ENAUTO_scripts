@@ -31,24 +31,35 @@ def main():
 
     # get project id from response
     proj_id = proj_task.json()["response"]["data"]
+    
+    # get current path
     current_path=Path.cwd()
+
+    # iterate over template files in template folder
     for template in os.listdir(f"{current_path}/templates"):
+        # open and load the file data to json
         with open(f"{current_path}/templates/{template}", "r") as handle:
             temp_data= json.load(handle)
 
         print(f"\nCreating template from file {template}")
+        
+        # send post request to submit new template containing payload data
         temp_resp= dnac.req(
             f"dna/intent/api/v1/template-programmer/project/{'proj_id'}/template",
             method="post",
             jsonbody=temp_data["body"]
         )
 
+        # wait for template creation
         temp_task= dnac.wait_for_task(temp_resp.json()["response"]["taskId"])
-        temp_id = temp_taks.json()["response"]["data"]
+        
+        # get template ID
+        temp_id = temp_task.json()["response"]["data"]
 
-
+        # create preview payload containing template data and template ID
         prev_body = {"params": temp_data["params"], "templateId": temp_id}
 
+        # send put request containing preview payload to create new template preview
         prev_data = dnac.req(
             "dna/intent/api/v1/template-programmer/template/preview",
             method="put",
@@ -56,17 +67,21 @@ def main():
         ).json()
 
         print(f"Checking template {template}:")
+
+        # check for errors
         if prev_data["validationErrors"]:
             print(f"Errors:")
             for error in prev_data["validationErrors"]:
                 print(f"{error['type']}: {error['message']}")
-
+        
+        # if there are no errors print the preview
         else:
             print(f"Snippet rendered:")
             print(prev_data["cliPreview"])
 
             version_and_deploy(dnac, temp_data, temp_id)
 
+# function for deploying template
 def version_and_deploy(dnac, temp_data, temp_id, ip_addr="10.10.20.81"):
 
 
