@@ -1,7 +1,7 @@
 import requests
 from requests.exceptions import HTTPError
 
-
+# function for request auth token from DNAC controller
 def get_token():
     base_url = "https://sandboxdnac.cisco.com/dna"
     auth_url = f"{base_url}/system/api/v1/auth/token"
