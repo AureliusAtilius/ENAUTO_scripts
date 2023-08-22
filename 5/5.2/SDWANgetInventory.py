@@ -1,9 +1,11 @@
 import requests
 import json
 
+# URL for Cisco SDWAN sandbox
 base_url = "https://sandbox-sdwan-2.cisco.com"
 sess = requests.session()
 
+# function for authenticating to controller
 def get_login(username, password):
         auth_url = f"{base_url}/j_security_check"
         login_body = {
@@ -18,8 +20,11 @@ def get_login(username, password):
         else:
                 print("***** LOGIN SUCCESS *****")
                 return login_resp
+        
+# authenticate to controller
 token = get_login('devnetuser', 'RG!_Yw919_83')
 
+# function for returning output containing device inventory, or device health
 def device_output(url):
         device_urls = {
         'dev_list': f"{base_url}/dataservice/device",
@@ -31,6 +36,7 @@ def device_output(url):
         }
         response = sess.get(url=device_urls[url], headers=headers, verify=False)
         return(response)
-        
+
+# request device list and print output in human friendly format       
 device_inv = device_output('dev_list').json()
 print(json.dumps(device_inv, indent=2))
