@@ -1,13 +1,19 @@
 import requests
 import json
 
+# URL for sdwan sandbox
 base_url = "https://sandbox-sdwan-2.cisco.com"
+
+# create session object
 sess = requests.session()
 
+#REST headers
 headers={
     "Content-Type": "application/json",
     "Accept": "application/json"
 }
+
+# function for requesting auth token
 def get_login(username, password):
     auth_url = f"{base_url}/j_security_check"
 
@@ -28,4 +34,5 @@ def get_login(username, password):
 
 token = get_login('devnetuser', 'RG!_Yw919_83')
 
+# request list of vsmart policies and print in human friendly format
 print(json.dumps(sess.get(f"{base_url}/dataservice/template/policy/vsmart",headers=headers,verify=False).json(),indent=2))
