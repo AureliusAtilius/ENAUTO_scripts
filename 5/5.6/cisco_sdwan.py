@@ -278,7 +278,8 @@ class CiscoSDWAN:
         # function for adding vsmart policy
         def add_policy_vsmart(
                         self, name, sites,vpns, approute_id, mesh_id, descriptption="none"
-        ):
+        ):      
+                # JSON payload containing policy information
                 body = {
                         "policyDescritpion": descriptption,
                         "poicyType": "feature",
@@ -296,20 +297,25 @@ class CiscoSDWAN:
                         "isPolicyActivated": False,
 
                 }
-
+                # post JSON payload to vSmart policy resource
                 self._req(
                         f"dataservice/template/policy/vsmart", method="post", jsonbody=body
                 )
 
+                # get list of policies
                 policies = self.get_policy_vsmart()
+
+                # iterate over policy list checking for new policy name, if new policy is there, return policy
                 for policy in policies.json()["data"]:
                         if policy["policyName"] == name:
                                 return policy
                 
+                # else return none 
                 return {"policyId":None}
 
         # function for activating vsmart policy
         def activate_policy_vsmart(self, policy_id):
+                
                 activate_resp = self_req(
                         f"dataservice/template/policy/vsmart/activate/{policy_id}",
                         method="post",
@@ -363,46 +369,4 @@ class CiscoSDWAN:
 
                 return self._req("dataservice/certificate/rootcertificate")
 
-
-        # System statistics
-
-        def get_system_stats(self, query):
-
-                return self._req(
-                        "dataservice/statistics/system/", method="post",jsonbody=query
-                )
         
-
-        #Administrative APIs
-
-        def is_admin(self):
-
-                resp = self._req("dataservice/admin/user/role")
-                return resp.json()["isAdmin"]
-        
-        def get_audit_log(self):
-
-                return self._req("dataservice/auditlog")
-
-        def add_user_to_group(self, body):
-
-                return self._req(
-                        "dataservice/admin/usergroup", method="post", jsonbody=body
-                )
-
-        def add_user(self, username, fullname, group_list):
-
-                body= {
-                        "group": group_list,
-                        "description": fullname,
-                        "userName": username,
-                        "password": "abc123",
-
-                }
-                return self._req("dataservice/admin/user", method="put", jsonbody=body)
-        
-        def update_password(self, username, password):
-
-                body = {"userName": username, "password": password}
-
-                return self._req("dataservice/admin/user/password/{username}", method="post", jsonbody=body)

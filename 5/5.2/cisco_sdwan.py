@@ -278,7 +278,8 @@ class CiscoSDWAN:
         # function for adding vsmart policy
         def add_policy_vsmart(
                         self, name, sites,vpns, approute_id, mesh_id, descriptption="none"
-        ):
+        ):      
+                # JSON payload containing policy information
                 body = {
                         "policyDescritpion": descriptption,
                         "poicyType": "feature",
@@ -296,20 +297,25 @@ class CiscoSDWAN:
                         "isPolicyActivated": False,
 
                 }
-
+                # post JSON payload to vSmart policy resource
                 self._req(
                         f"dataservice/template/policy/vsmart", method="post", jsonbody=body
                 )
 
+                # get list of policies
                 policies = self.get_policy_vsmart()
+
+                # iterate over policy list checking for new policy name, if new policy is there, return policy
                 for policy in policies.json()["data"]:
                         if policy["policyName"] == name:
                                 return policy
                 
+                # else return none 
                 return {"policyId":None}
 
         # function for activating vsmart policy
         def activate_policy_vsmart(self, policy_id):
+                
                 activate_resp = self_req(
                         f"dataservice/template/policy/vsmart/activate/{policy_id}",
                         method="post",
