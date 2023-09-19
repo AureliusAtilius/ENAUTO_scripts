@@ -6,12 +6,16 @@ from cisco_sdwan import CiscoSDWAN
 
 
 def main():
+
+    # invoke instance of CiscoSDWAN object using always on sandbox
     sdwan= CiscoSDWAN.get_instance_always_on()
 
+    # check if authenticated as admin
     if not sdwan.is_admin():
         print("You are not currently authenticated as an 'admin' user.")
         sys.exit()
     
+    # create payload containing audit information
     group_name= "audit"
     body = {
         "groupName": group_name,
@@ -33,19 +37,25 @@ def main():
         ],
     }
 
+    # add audit group
     sdwan.add_user_to_group(body)
     
+    # add user to audit group
     sdwan.add_user("jdoe", "jane doe", [group_name])
 
+    # update user password
     user_password = getpass.getpass("Enter password for jdoe: ")
     sdwan.update_password("jdoe", user_password)
 
+    # create CiscoSDWAN session 
     audit = CiscoSDWAN(
         host="10.10.20.90", port= 8443, username="jdoe", password=user_password
     )
 
+    # get audit log
     audit_resp = audit.get_audit_log()
 
+    # write audit info to file
     outfile = "log_useraudit.csv"
     print(f"Creating {outfile} from vManage audit log")
 
