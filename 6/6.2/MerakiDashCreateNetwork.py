@@ -4,17 +4,19 @@ import json
 #use meraki always on sandbox
 merakiKey="fd6dd87d96915f21bc0e0b3d96a866ff0e53e381"
 
-
+# get list of orgs
 def get_orgs():
         dashboard= meraki.DashboardAPI(merakiKey,suppress_logging=True)
         response= dashboard.organizations.getOrganizations()
         return response
 
+# get org ID by org name
 def get_org_ID(org_list, org_name):
         for org in org_list:
                 if org["name"]== org_name:
                         return org["id"]
 
+# create organization by org name
 def create_orgs(org_name):
         dashboard= meraki.DashboardAPI(merakiKey,suppress_logging=True)
         name = org_name
@@ -25,6 +27,7 @@ def create_orgs(org_name):
         except Exception as ex:
                 print(ex)
 
+# get list of networks by org ID
 def get_networks(org_id):
         organization_id=org_id
         dashboard=meraki.DashboardAPI(merakiKey,suppress_logging=True)
@@ -35,6 +38,7 @@ def get_networks(org_id):
         except Exception as ex:
                 print(ex)
 
+# create network in org using org ID
 def create_network(org_id,network_name):
         dashboard=meraki.DashboardAPI(merakiKey,suppress_logging=True)
         product_types= ['appliance','switch','camera']
@@ -51,6 +55,8 @@ def create_network(org_id,network_name):
 
         except Exception as ex:
                 print(ex)
+
+                
 if __name__=="__main__":
         #get org list
         org_list=get_orgs()
